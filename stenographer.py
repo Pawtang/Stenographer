@@ -32,7 +32,7 @@ class Stenographer:
         for note in self.notes_buffer:
             if "@" in note:
                 formatted_notes["Attendees"].append(note.replace("@", ""))
-            if "!" in note:
+            elif "!" in note:
                 formatted_notes["Action Items"].append(note.replace("!", ""))
             elif "#" in note:
                 formatted_notes["Key Takeaways"].append(note.replace("#", ""))
@@ -43,7 +43,7 @@ class Stenographer:
         return formatted_notes
 
     def save_notes(self, formatted_notes):
-        filename = f"Stenographer_Notes_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.txt"
+        filename = f"./notes/Stenographer_Notes_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.txt"
         with open(filename, "w") as file:
             for section, notes in formatted_notes.items():
                 if len(notes) > 0:
