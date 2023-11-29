@@ -1,5 +1,4 @@
 import csv
-import keyboard  # Requires external installation
 import os
 import datetime
 import re
@@ -29,12 +28,16 @@ class Stenographer:
         return note
 
     def format_notes(self):
-        formatted_notes = {"Key Takeaways": [], "Action Items": [], "Notes": []}
+        formatted_notes = {"Attendees": [],"Key Takeaways": [], "Action Items": [], "Notes": [], "Research Items": []}
         for note in self.notes_buffer:
+            if "@" in note:
+                formatted_notes["Attendees"].append(note.replace("@", ""))
             if "!" in note:
                 formatted_notes["Action Items"].append(note.replace("!", ""))
             elif "#" in note:
                 formatted_notes["Key Takeaways"].append(note.replace("#", ""))
+            elif "?" in note:
+                formatted_notes["Research Items"].append(note.replace("?", ""))
             else:
                 formatted_notes["Notes"].append(note)
         return formatted_notes
@@ -43,13 +46,27 @@ class Stenographer:
         filename = f"Stenographer_Notes_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.txt"
         with open(filename, "w") as file:
             for section, notes in formatted_notes.items():
-                file.write(f"{section}:\n")
+                if len(notes) > 0:
+                    file.write(f"{section}:\n")
                 for note in notes:
                     file.write(f"- {note}\n")
                 file.write("\n")
 
     def run(self):
-        print("Stenographer is running. Type your notes and press Enter. Press Ctrl+S to save and exit.")
+        print("""\n
+----------------------------------------------------------------------------
+Stenographer is running. Type your notes and press Enter.
+Press Ctrl+C to save and exit.
+              
+Markdown tags (descending order of priority - only one tag per line)      
+| Attendees: @        
+| Action Item: !
+| Key Takeaway: #
+| Research Item: ?
+              
+Item Priority: -1, -2, -3, etc...(Can append to any line in addition to tag)
+----------------------------------------------------------------------------
+""")
         try:
             while True:
                 try:
@@ -65,6 +82,5 @@ class Stenographer:
             self.save_notes(formatted_notes)
             print("Notes saved successfully.")
 
-# Example usage
 stenographer = Stenographer("library.csv")
 stenographer.run()

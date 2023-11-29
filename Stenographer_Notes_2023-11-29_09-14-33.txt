@@ -1,0 +1,27 @@
+
+Action Items:
+-  Send out agenda ahead of meeting
+-  Build visit agenda - line walk -- Supply chain, manufacturing, quality
+
+Notes:
+- * prepared component table for afternoon meeting with Dave/Mike/Jason - focusing on 167 (158NG is not fully costed, 158 is limited spend scope over time)
+- 
+- * could potentially have a good idea what % of component spend in scope from our afternoon meeting
+- 
+- * continuing to dig into PWB/FWB presence and assemblies - kind of manual BOM analysis to get it right
+- 
+- * Mike to connect us with someone on BOM questions
+- 
+- 
+- 
+- (include a way to append current line submit to last line as modifier)
+- 
+- 
+- Head of mechanical, head of electrical - main overview of RF, constraints
+- Supply chain, manufacturing, quality
+- 
+- Major avenues: FWB to PWB, total PCB reduction, E. SCing, 
+
+Research Items:
+-  RF Hardware duplication -- one for each channel, or redundancy spec
+
