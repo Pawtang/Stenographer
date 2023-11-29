@@ -1,5 +1,5 @@
 import csv
-import os
+# import os
 import datetime
 import re
 
@@ -36,8 +36,8 @@ class Stenographer:
                 formatted_notes["Action Items"].append(note.replace("!", ""))
             elif "#" in note:
                 formatted_notes["Key Takeaways"].append(note.replace("#", ""))
-            elif "?" in note:
-                formatted_notes["Research Items"].append(note.replace("?", ""))
+            elif "-?" in note:
+                formatted_notes["Research Items"].append(note.replace("-?", ""))
             else:
                 formatted_notes["Notes"].append(note)
         return formatted_notes
@@ -49,7 +49,7 @@ class Stenographer:
                 if len(notes) > 0:
                     file.write(f"{section}:\n")
                 for note in notes:
-                    file.write(f"- {note}\n")
+                    file.write(f"- {note.lstrip()}\n")
                 file.write("\n")
 
     def run(self):
@@ -62,7 +62,7 @@ Markdown tags (descending order of priority - only one tag per line)
 | Attendees: @        
 | Action Item: !
 | Key Takeaway: #
-| Research Item: ?
+| Research Item: -?
               
 Item Priority: -1, -2, -3, etc...(Can append to any line in addition to tag)
 ----------------------------------------------------------------------------
