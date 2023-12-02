@@ -42,8 +42,11 @@ class Stenographer:
                 formatted_notes["Notes"].append(note)
         return formatted_notes
 
-    def save_notes(self, formatted_notes):
-        filename = f"./notes/Stenographer_Notes_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.txt"
+    def save_notes(self, formatted_notes, title):
+        if title:
+            filename = f"./notes/{datetime.datetime.now().strftime('%Y-%m-%d')}_{title}.txt"
+        else:
+            filename = f"./notes/Stenographer_Notes_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.txt"
         with open(filename, "w") as file:
             for section, notes in formatted_notes.items():
                 if len(notes) > 0:
@@ -55,7 +58,14 @@ class Stenographer:
     def run(self):
         print("""\n
 ----------------------------------------------------------------------------
-Stenographer is running. Type your notes and press Enter.
+Stenographer is running. Enter the title for your notes session.
+----------------------------------------------------------------------------
+""")
+        title = input("Title: ").strip()
+
+        print("""\n
+----------------------------------------------------------------------------
+Type your notes and press Enter.
 Press Ctrl+C to save and exit.
               
 Markdown tags (descending order of priority - only one tag per line)      
@@ -79,7 +89,7 @@ Item Priority: -1, -2, -3, etc...(Can append to any line in addition to tag)
             print("\nKeyboardInterrupt received, ending session...")
         finally:
             formatted_notes = self.format_notes()
-            self.save_notes(formatted_notes)
+            self.save_notes(formatted_notes, title)
             print("Notes saved successfully.")
 
 stenographer = Stenographer("library.csv")
