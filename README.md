@@ -5,7 +5,8 @@ Stenographer is a note-taking application designed to be portable, hyperlight, a
 I began working on Stenographer to enable faster note taking in a business environment. The goal is  to compress common words and phrases and organize notes into a simple common structure to be shared with a team.
 
 
-#How it Works
+# How it Works
+
 When you launch Stenographer, it will ask you for a title input and then begin listening for input.
 You can leave the title blank to have the file name be a timestamp.
 
